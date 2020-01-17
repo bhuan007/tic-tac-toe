@@ -8,7 +8,7 @@
 <body>
     <div class="startMenu">
         <p>Please choose a Game Mode: </p>
-        <select>
+        <select class="gameMode">
             <option value="player" selected>Player vs Player</option>
             <option value="easy">Player vs Easy AI</option>
             <option value="hard">Player vs Impossible AI</option>
@@ -17,7 +17,21 @@
     </div>
 <div class="playArea">
 
-    <div class="statusBar"><h1 class="status"></h1></div>
+    <div class="statusBar">
+        <div class="scoring">
+            <h1>Player 1 Score</h1>
+            <h2 class="p1Score">0</h2>
+        </div>
+        <div class="scoring">
+            <h1 class="status"></h1>
+            <button class="playAgainBtn" onclick="playAgain()">Play Again?</button>
+        </div>
+        
+        <div class="scoring">
+            <h1>Player 2 Score</h1>
+            <h2 class="p2Score">0</h2>
+        </div>
+    </div>
 
     <div class="board">
         <div class="cell" data-cell="0" onclick="Logic(0)"></div>

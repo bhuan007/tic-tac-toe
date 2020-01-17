@@ -5,21 +5,28 @@ const Game = (function () {
     const gameBoard2 = [];
     let gameStatus = true;
     let currentPlayer = 1;
-    const statusBar = document.querySelector(".status");
+    const status = document.querySelector(".status");
+    const p1ScoreElement = document.querySelector(".p1Score");
+    const p2ScoreElement = document.querySelector(".p2Score");
+    const playAgainBtn = document.querySelector(".playAgainBtn");
+    const gameMode = document.querySelector(".gameMode");
+    status.textContent = `Player ${currentPlayer}'s turn`;
+    let p1Score = 0;
+    let p2Score = 0;
 
     const switchPlayer = () => {
         if (Game.currentPlayer == 1) {
             Game.currentPlayer = 2;
-            statusBar.textContent = "Player 2's Turn";
+            status.textContent = `Player ${Game.currentPlayer}'s turn`;
         }
         else {
             Game.currentPlayer = 1;
-            statusBar.textContent = "Player 1's Turn";
+            status.textContent = `Player ${Game.currentPlayer}'s turn`;
         }
     }
 
 
-    return { gameBoard1, gameBoard2, switchPlayer, gameStatus, currentPlayer, statusBar }
+    return { gameBoard1, gameBoard2, switchPlayer, gameStatus, currentPlayer, statusBar: status, p1Score, p2Score, p1ScoreElement, p2ScoreElement, playAgainBtn, gameMode }
 }());
 
 
@@ -68,10 +75,16 @@ const menuToggle = (isMenu) => {
     else {
         startMenu.style.display = "block";
         playArea.style.display = "none";
+        restart();
     }
 }
 
 const resetCells = () => {
+    Game.gameBoard1 = [];
+    Game.gameBoard2 = [];
+    Game.gameStatus = true;
+    Game.currentPlayer = 1;
+    Game.playAgainBtn.style.display = "none";
     for(let i = 0; i < 9; i++) {
         const cell = document.querySelector(`[data-cell='${i}']`)
         cell.innerHTML = "";
@@ -79,18 +92,20 @@ const resetCells = () => {
 }
 
 const restart = () => {
-    Game.gameBoard1 = [];
-    Game.gameBoard2 = [];
     resetCells();
-    Game.gameStatus = true;
-    Game.currentPlayer = 1;
+    Game.p1Score = 0;
+    Game.p2Score = 0;
+    Game.p1ScoreElement.textContent = Game.p1Score;
+    Game.p2ScoreElement.textContent = Game.p2Score;
 
     Game.statusBar.textContent = `Player ${Game.currentPlayer}'s turn`;
 }
 
-
-
-
+const playAgain = () => {
+    resetCells();
+    Game.statusBar.textContent = `Player ${Game.currentPlayer}'s turn`;
+    
+}
 
 //This function will check if the game is over and if a player won or tied
 const checkWin = () => {
@@ -116,7 +131,11 @@ const checkWin = () => {
             if (count1 == 3) {
                 console.log("Player 1 Win");
                 Game.statusBar.textContent = "Player 1 Wins!";
+                Game.p1Score++;
+                Game.p1ScoreElement.textContent = Game.p1Score;
                 Game.gameStatus = false;
+                Game.playAgainBtn.style.display = "block";
+
                 break;
             }
         }
@@ -127,7 +146,10 @@ const checkWin = () => {
             if (count2 == 3) {
                 console.log("Player 2 Win");
                 Game.statusBar.textContent = "Player 2 Wins!";
+                Game.p2Score++;
+                Game.p2ScoreElement.textContent = Game.p2Score;
                 Game.gameStatus = false;
+                Game.playAgainBtn.style.display = "block";
                 break;
             }
         }
