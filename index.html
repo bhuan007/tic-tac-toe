@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="startMenu">
+        <p>Please choose a Game Mode: </p>
+        <select>
+            <option value="player" selected>Player vs Player</option>
+            <option value="easy">Player vs Easy AI</option>
+            <option value="hard">Player vs Impossible AI</option>
+        </select>
+        <button onclick="menuToggle(true)">PLAY!</button>
+    </div>
+<div class="playArea">
+
+    <div class="statusBar"><h1 class="status"></h1></div>
+
+    <div class="board">
+        <div class="cell" data-cell="0" onclick="Logic(0)"></div>
+        <div class="cell" data-cell="1" onclick="Logic(1)"></div>
+        <div class="cell" data-cell="2" onclick="Logic(2)"></div>
+        <div class="cell" data-cell="3" onclick="Logic(3)"></div>
+        <div class="cell" data-cell="4" onclick="Logic(4)"></div>
+        <div class="cell" data-cell="5" onclick="Logic(5)"></div>
+        <div class="cell" data-cell="6" onclick="Logic(6)"></div>
+        <div class="cell" data-cell="7" onclick="Logic(7)"></div>
+        <div class="cell" data-cell="8" onclick="Logic(8)"></div>
+
+        <button onclick="menuToggle(false)">Main Menu</button>
+        <button onclick="restart()">Restart</button>
+    </div>
+</div>
+    
+    <script src="scripts/script.js"></script>
+</body>
+</html>
