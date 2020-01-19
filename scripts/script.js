@@ -104,16 +104,19 @@ const Logic = (cellNum) => {
         if (Game.gameStatus) {
             if (!Game.gameBoard1.includes(cellNum) && !Game.easyGenerated.includes(cellNum)) {
                 clickPlacement(cellNum, Game.currentPlayer);
-                clickPlacement(easyMode(), 2);
-                Game.currentPlayer = 1;
                 checkWin();
+                if(Game.gameStatus) {
+                    clickPlacement(easyMode(), 2);
+                    Game.currentPlayer = 1;
+                    checkWin();
+                }
             }
 
         }
     }
     else if (Game.gameMode.value == "hard") {
         if (Game.gameStatus) {
-
+            
         }
     }
 
@@ -167,9 +170,6 @@ const playAgain = () => {
 
 //This function will check if the game is over and if a player won or tied
 const checkWin = () => {
-    
-
-    
     let count1 = 0;
     let count2 = 0;
 
